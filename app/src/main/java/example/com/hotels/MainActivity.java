@@ -1,0 +1,59 @@
+package example.com.hotels;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+
+import example.com.hotels.ui.list.ListFragment;
+
+public class MainActivity extends AppCompatActivity {
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = (@NonNull MenuItem item) -> {
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                showListFragment();
+                return true;
+            case R.id.navigation_favorites:
+                showFavorites();
+                return true;
+            case R.id.navigation_web:
+                showWeb();
+                return true;
+        }
+        return false;
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(toolbar);
+
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(navigationListener);
+
+        showListFragment();
+    }
+
+    private void showListFragment() {
+        ListFragment listFragment = new ListFragment();
+        final String tag = "list";
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainContainer, listFragment, tag)
+                .commit();
+    }
+
+    private void showFavorites() {
+        // TODO: Implement
+    }
+
+    private void showWeb() {
+        // TODO: Implement
+    }
+
+}
