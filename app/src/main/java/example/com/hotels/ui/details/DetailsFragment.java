@@ -173,7 +173,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         final String tag = "comments";
         CommentsFragment details = CommentsFragment.createInstance(hotel);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.mainContainer, details, tag)
+                .replace(R.id.mainContainer, details, tag)
                 .addToBackStack(tag)
                 .commit();
     }

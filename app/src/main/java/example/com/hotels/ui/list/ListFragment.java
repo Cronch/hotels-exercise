@@ -99,7 +99,7 @@ public class ListFragment extends Fragment implements ListContract.View {
         final String tag = "details";
         DetailsFragment details = DetailsFragment.createInstance(hotel);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.mainContainer, details, tag)
+                .replace(R.id.mainContainer, details, tag)
                 .addToBackStack(tag)
                 .commit();
     }
