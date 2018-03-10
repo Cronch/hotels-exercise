@@ -1,3 +1,7 @@
 <resources>
     <string name="reviews_title">Comentarios</string>
+
+    <!-- Accessibility strings -->
+    <string name="accessibility_good_comments">Buenos comentarios</string>
+    <string name="accessibility_bad_comments">Malos comentarios</string>
 </resources>

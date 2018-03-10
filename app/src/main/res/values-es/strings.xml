@@ -6,4 +6,7 @@
     <string name="title_web">Web</string>
 
     <string name="retry">Reintentar</string>
+
+    <!-- Accessibility strings -->
+    <string name="accessibility_hotel_image">Imagen del hotel</string>
 </resources>

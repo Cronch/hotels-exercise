@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_base_height"
             android:layout_below="@+id/name"
+            android:contentDescription="@string/accessibility_hotel_image"
             android:layout_centerHorizontal="true" />
 
         <android.support.v7.widget.AppCompatRatingBar

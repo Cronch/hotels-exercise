@@ -3,4 +3,7 @@
     <string name="view_comments">Ver comentarios</string>
     <string name="description">Descripción</string>
     <string name="amenities">Comodidades</string>
+
+    <!-- Accessibility strings -->
+    <string name="accessibility_amenity">Icono de comodidad</string>
 </resources>

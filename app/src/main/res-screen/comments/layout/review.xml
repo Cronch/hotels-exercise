@@ -23,6 +23,7 @@
             android:layout_width="@dimen/review_icon_size"
             android:layout_height="@dimen/review_icon_size"
             android:layout_margin="10dp"
+            android:contentDescription="@string/accessibility_good_comments"
             app:srcCompat="@drawable/ic_thumb_up" />
 
         <TextView
@@ -47,6 +48,7 @@
             android:layout_width="@dimen/review_icon_size"
             android:layout_height="@dimen/review_icon_size"
             android:layout_margin="10dp"
+            android:contentDescription="@string/accessibility_bad_comments"
             app:srcCompat="@drawable/ic_thumb_down" />
 
         <TextView

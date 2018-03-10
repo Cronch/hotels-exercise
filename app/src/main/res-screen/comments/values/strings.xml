@@ -1,4 +1,8 @@
 <resources>
     <string name="reviews_title">Reviews</string>
     <string name="review_quotes">\"%1$s\"</string>
+
+    <!-- Accessibility strings -->
+    <string name="accessibility_good_comments">Good comments</string>
+    <string name="accessibility_bad_comments">Good comments</string>
 </resources>
