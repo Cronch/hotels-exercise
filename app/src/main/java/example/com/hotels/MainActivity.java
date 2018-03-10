@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(navigationListener);
 
-        showListFragment();
+        if (savedInstanceState == null) {
+            showListFragment();
+        }
     }
 
     private void showListFragment() {
