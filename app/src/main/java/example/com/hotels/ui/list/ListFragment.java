@@ -85,7 +85,7 @@ public class ListFragment extends Fragment implements ListContract.View {
     }
 
     private void setUpHotelList() {
-        list.setHasFixedSize(false);
+        list.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         list.setLayoutManager(mLayoutManager);
         listAdapter = new ListAdapter(onHotelClick);

@@ -78,7 +78,7 @@ public class CommentsFragment extends Fragment {
     }
 
     private void setUpHotelList() {
-        list.setHasFixedSize(false);
+        list.setHasFixedSize(true);
         list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         list.setLayoutManager(mLayoutManager);
