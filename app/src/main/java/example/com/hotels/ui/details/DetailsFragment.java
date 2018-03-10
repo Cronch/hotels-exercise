@@ -148,8 +148,11 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         name.setText(hotel.getName());
         description.setText(hotel.getDescription());
         ratingBar.setRating(hotel.getStars());
-        viewComments.setVisibility(View.VISIBLE);
-        viewComments.setOnClickListener((View v) -> showComments(hotel));
+
+        if (!hotel.getReviews().isEmpty()) {
+            viewComments.setVisibility(View.VISIBLE);
+            viewComments.setOnClickListener((View v) -> showComments(hotel));
+        }
 
         GlideApp.with(getActivity())
                 .load(hotel.getMainPicture())
