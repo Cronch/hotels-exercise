@@ -10,12 +10,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import example.com.hotels.ui.list.ListFragment;
 import example.com.hotels.ui.web.WebActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MainActivity";
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = (@NonNull MenuItem item) -> {
         switch (item.getItemId()) {
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
