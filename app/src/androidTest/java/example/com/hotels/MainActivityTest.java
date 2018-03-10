@@ -66,14 +66,13 @@ public class MainActivityTest {
         onView(withId(R.id.viewComments)).perform(click());
 
         // Check first comment
-        onView(withRecyclerView(R.id.list).atPosition(0)).check(matches(hasDescendant(withId(R.id.goodComments))));
-        onView(withRecyclerView(R.id.list).atPosition(0)).check(matches(hasDescendant(withId(R.id.goodComments))));
-        onView(withRecyclerView(R.id.list).atPosition(0)).check(matches(hasDescendant(withId(R.id.userName))));
+        onView(withRecyclerView(R.id.commentsList).atPosition(0)).check(matches(hasDescendant(withId(R.id.goodComments))));
+        onView(withRecyclerView(R.id.commentsList).atPosition(0)).check(matches(hasDescendant(withId(R.id.userName))));
 
         // Check second comment
-        onView(withRecyclerView(R.id.list).atPosition(1)).check(matches(hasDescendant(withId(R.id.goodComments))));
-        onView(withRecyclerView(R.id.list).atPosition(1)).check(matches(hasDescendant(withId(R.id.badComments))));
-        onView(withRecyclerView(R.id.list).atPosition(1)).check(matches(hasDescendant(withId(R.id.userName))));
+        onView(withRecyclerView(R.id.commentsList).atPosition(1)).check(matches(hasDescendant(withId(R.id.goodComments))));
+        onView(withRecyclerView(R.id.commentsList).atPosition(1)).check(matches(hasDescendant(withId(R.id.badComments))));
+        onView(withRecyclerView(R.id.commentsList).atPosition(1)).check(matches(hasDescendant(withId(R.id.userName))));
 
         Espresso.pressBack();
         checkDetailsViews();

@@ -31,7 +31,7 @@ public class CommentsFragment extends Fragment {
     private Unbinder unbinder;
     private List<Review> reviewList;
 
-    @BindView(R.id.list)
+    @BindView(R.id.commentsList)
     RecyclerView list;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
