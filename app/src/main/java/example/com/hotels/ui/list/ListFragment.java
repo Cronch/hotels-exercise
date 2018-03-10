@@ -82,7 +82,6 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     private void setUpHotelList() {
         list.setHasFixedSize(false);
-        list.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         list.setLayoutManager(mLayoutManager);
         listAdapter = new ListAdapter(onHotelClick);
@@ -91,9 +90,9 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     private OnHotelClick onHotelClick = (Hotel hotel) -> {
         final String tag = "details";
-        DetailsFragment deta = DetailsFragment.createInstance(hotel);
+        DetailsFragment details = DetailsFragment.createInstance(hotel);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mainContainer, deta, tag)
+                .replace(R.id.mainContainer, details, tag)
                 .addToBackStack(tag)
                 .commit();
     };
