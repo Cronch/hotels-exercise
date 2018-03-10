@@ -174,7 +174,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void zoomImage(Hotel hotel) {
         final String TAG = "imageDialog";
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         DialogFragment newFragment = ImageDialogFragment.newInstance(hotel);
         newFragment.show(ft, TAG);
     }
