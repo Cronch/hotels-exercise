@@ -1,0 +1,4 @@
+<resources>
+    <string name="reviews_title">Reviews</string>
+    <string name="review_quotes">\"%1$s\"</string>
+</resources>

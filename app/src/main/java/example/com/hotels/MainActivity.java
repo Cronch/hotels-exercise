@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_home:
                 showListFragment();
                 return true;
-            case R.id.navigation_favorites:
+            /*case R.id.navigation_favorites:
                 showFavorites();
-                return true;
+                return true;*/
             case R.id.navigation_web:
                 showWeb();
                 return false;

@@ -9,24 +9,39 @@ import example.com.hotels.data.model.Hotel;
 
 public class HotelParser extends BaseParser<Hotel> {
 
-   private List<Item> items;
+    private List<Item> items;
 
-   private Item hotel;
+    private Item hotel;
 
-   private class Item {
-       private Long id;
-       private String name;
-       private String main_picture;
-       private Integer stars;
+    private class Item {
+        private Long id;
+        private String name;
+        private String main_picture;
+        private Integer stars;
 
-       private String description;
-       private List<Amenity> amenities;
-   }
+        private String description;
+        private List<Amenity> amenities;
+        private List<Review> reviews;
+    }
 
-   private class Amenity {
+    private class Amenity {
         private String id;
         private String description;
-   }
+    }
+
+    private class Review {
+        private Comment comments;
+        private User user;
+    }
+
+    private class Comment {
+        private String good;
+        private String bad;
+    }
+
+    private class User {
+        private String name;
+    }
 
     @Override
     public List<Hotel> getItemList() {
@@ -55,6 +70,37 @@ public class HotelParser extends BaseParser<Hotel> {
                 .amenities(buildAmenities(item))
                 .description(item.description)
                 .stars(item.stars)
+                .reviews(buildReviews(item))
+                .build();
+    }
+
+    private ArrayList<example.com.hotels.data.model.Review> buildReviews(Item item) {
+        ArrayList<example.com.hotels.data.model.Review> reviews = new ArrayList<>();
+
+        if (item.reviews != null) {
+            for (Review review : item.reviews) {
+                reviews.add(buildReview(review));
+            }
+        }
+
+        return reviews;
+    }
+
+    private example.com.hotels.data.model.Review buildReview(Review review) {
+        return example.com.hotels.data.model.Review.builder()
+                .user(buildUser(review.user))
+                .goodComments(review.comments != null ? review.comments.good : null)
+                .badComments(review.comments != null ? review.comments.bad : null)
+                .build();
+    }
+
+    private example.com.hotels.data.model.User buildUser(User user) {
+        if (user == null) {
+            return null;
+        }
+
+        return example.com.hotels.data.model.User.builder()
+                .name(user.name)
                 .build();
     }
 
@@ -71,10 +117,10 @@ public class HotelParser extends BaseParser<Hotel> {
     }
 
     private example.com.hotels.data.model.Amenity buildAmenity(Amenity amenity) {
-       return example.com.hotels.data.model.Amenity.builder()
-               .description(amenity.description)
-               .name(AmenitiesEnum.valueOf(amenity.id))
-               .build();
+        return example.com.hotels.data.model.Amenity.builder()
+                .description(amenity.description)
+                .name(AmenitiesEnum.valueOf(amenity.id))
+                .build();
     }
 
 }

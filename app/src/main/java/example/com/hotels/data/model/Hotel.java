@@ -1,6 +1,7 @@
 package example.com.hotels.data.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hotel {
@@ -11,6 +12,7 @@ public class Hotel {
     private String description;
     private List<Amenity> amenities;
     private Integer stars;
+    private ArrayList<Review> reviews;
 
     private Hotel(Builder builder) {
         id = builder.id;
@@ -19,6 +21,11 @@ public class Hotel {
         amenities = builder.amenities;
         description = builder.description;
         stars = builder.stars;
+        reviews = builder.reviews;
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
     }
 
     public Integer getStars() {
@@ -56,6 +63,7 @@ public class Hotel {
         private List<Amenity> amenities;
         private String description;
         private Integer stars;
+        private ArrayList<Review> reviews;
 
         public Builder() {
         }
@@ -87,6 +95,11 @@ public class Hotel {
 
         public Builder stars(Integer val) {
             stars = val;
+            return this;
+        }
+
+        public Builder reviews(ArrayList<Review> val) {
+            reviews = val;
             return this;
         }
 

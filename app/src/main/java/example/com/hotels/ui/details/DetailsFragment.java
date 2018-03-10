@@ -35,7 +35,7 @@ import example.com.hotels.data.HotelManager;
 import example.com.hotels.data.model.Amenity;
 import example.com.hotels.data.model.Hotel;
 import example.com.hotels.injection.glide.GlideApp;
-import example.com.hotels.ui.list.ListAdapter;
+import example.com.hotels.ui.comments.CommentsFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -65,6 +65,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     RecyclerView amenities;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.viewComments)
+    View viewComments;
 
     public static DetailsFragment createInstance(Hotel hotel) {
         DetailsFragment detailsFragment = new DetailsFragment();
@@ -94,7 +96,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         setUpActionBar();
         Long id = getArguments().getLong(ID_ARG);
         setUpAmenityList();
-
         presenter.getHotelDetails(id);
 
         return rootView;
@@ -148,6 +149,9 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         description.setText(hotel.getDescription());
         ratingBar.setRating(hotel.getStars());
 
+        viewComments.setVisibility(View.VISIBLE);
+        viewComments.setOnClickListener((View v) -> showComments(hotel));
+
         GlideApp.with(getActivity())
                 .load(hotel.getMainPicture())
                 .placeholder(R.drawable.placeholder)
@@ -157,6 +161,15 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
         List<Amenity> amenities = hotel.getAmenities();
         amenitiesAdapter.setData(amenities);
+    }
+
+    private void showComments(Hotel hotel) {
+        final String tag = "comments";
+        CommentsFragment details = CommentsFragment.createInstance(hotel);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mainContainer, details, tag)
+                .addToBackStack(tag)
+                .commit();
     }
 
     private void zoomImage(Hotel hotel) {
