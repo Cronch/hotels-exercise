@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:id="@+id/listContainer"
-    android:orientation="vertical">
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/connectionErrorView"
+        android:layout_width="@dimen/no_network_image_size"
+        android:layout_height="@dimen/no_network_image_size"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:visibility="gone"
+        android:contentDescription="@string/accessibility_no_connection"
+        android:src="@drawable/ic_cloud_off"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:indeterminate="true"/>
+        android:layout_gravity="center"
+        android:indeterminate="true" />
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

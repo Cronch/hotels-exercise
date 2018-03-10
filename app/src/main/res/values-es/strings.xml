@@ -9,4 +9,5 @@
 
     <!-- Accessibility strings -->
     <string name="accessibility_hotel_image">Imagen del hotel</string>
+    <string name="accessibility_no_connection">Error de conexión</string>
 </resources>

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import java.util.List;
@@ -42,6 +43,8 @@ public class ListFragment extends Fragment implements ListContract.View {
     ProgressBar progressBar;
     @BindView(R.id.listContainer)
     View container;
+    @BindView(R.id.connectionErrorView)
+    ImageView connectionErrorView;
 
     private ListAdapter listAdapter;
 
@@ -106,12 +109,14 @@ public class ListFragment extends Fragment implements ListContract.View {
 
     @Override
     public void onSuccess(List<Hotel> list) {
+        connectionErrorView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         listAdapter.setData(list);
     }
 
     @Override
     public void onError(Throwable throwable) {
+        connectionErrorView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry, (View v) -> presenter.getHotels())

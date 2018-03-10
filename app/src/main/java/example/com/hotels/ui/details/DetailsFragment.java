@@ -43,6 +43,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
     private final static String ID_ARG = "idArg";
 
+    private Long hotelId;
     private Unbinder unbinder;
     private DetailsContract.Presenter presenter;
     private AmenitiesAdapter amenitiesAdapter;
@@ -65,6 +66,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     ProgressBar progressBar;
     @BindView(R.id.viewComments)
     View viewComments;
+    @BindView(R.id.connectionErrorView)
+    ImageView connectionErrorView;
 
     public static DetailsFragment createInstance(Hotel hotel) {
         DetailsFragment detailsFragment = new DetailsFragment();
@@ -101,8 +104,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void onStart() {
         super.onStart();
-        Long id = getArguments().getLong(ID_ARG);
-        presenter.getHotelDetails(id);
+        hotelId = getArguments().getLong(ID_ARG);
+        presenter.getHotelDetails(hotelId);
     }
 
     private void setUpActionBar() {
@@ -132,14 +135,18 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
     @Override
     public void onError(Throwable throwable) {
+        connectionErrorView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
-        Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
+        Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.retry, (View v) -> presenter.getHotelDetails(hotelId))
                 .show();
     }
 
     @Override
     public void onSuccess(Hotel hotel) {
+        connectionErrorView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
 
         name.setText(hotel.getName());
         description.setText(hotel.getDescription());
