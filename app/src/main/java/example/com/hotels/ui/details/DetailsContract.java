@@ -6,10 +6,15 @@ public interface DetailsContract {
 
     interface View {
         void onError(Throwable throwable);
+
         void onSuccess(Hotel hotel);
     }
 
     interface Presenter {
+        void onViewAttached();
+
+        void onViewDetached();
+
         void getHotelDetails(Long hotelId);
     }
 

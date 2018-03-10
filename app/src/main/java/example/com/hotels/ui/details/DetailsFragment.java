@@ -87,6 +87,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new DetailsPresenter(this, dataManager, AndroidSchedulers.mainThread(), Schedulers.io());
+        presenter.onViewAttached();
     }
 
     @Override
@@ -124,12 +125,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         amenities.setLayoutManager(mLayoutManager);
         amenities.setAdapter(amenitiesAdapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
@@ -179,6 +174,18 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DialogFragment newFragment = ImageDialogFragment.newInstance(hotel);
         newFragment.show(ft, TAG);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onViewDetached();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }
