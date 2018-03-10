@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Hoteles</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_web">Web</string>
+
+    <string name="retry">Reintentar</string>
+</resources>
