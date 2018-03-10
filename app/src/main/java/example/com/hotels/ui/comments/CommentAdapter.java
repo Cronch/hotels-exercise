@@ -39,7 +39,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.userName.setText(review.getUser().getName());
 
         if (review.getGoodComments() != null) {
-            String goodComments = context.getString(R.string.review_quotes, review.getGoodComments());
+            String goodComments = context.getString(R.string.review_quotes, review.getGoodComments())
+                    .replace("\\\n", "\n");
             holder.goodComments.setText(goodComments);
             holder.goodCommentsContainer.setVisibility(View.VISIBLE);
         } else {
@@ -47,7 +48,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         if (review.getBadComments() != null) {
-            String badComments = context.getString(R.string.review_quotes, review.getBadComments());
+            String badComments = context.getString(R.string.review_quotes, review.getBadComments())
+                    .replace("\\\n", "\n");
             holder.badComments.setText(badComments);
             holder.badCommentsContainer.setVisibility(View.VISIBLE);
         } else {
