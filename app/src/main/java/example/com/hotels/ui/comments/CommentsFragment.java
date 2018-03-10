@@ -63,8 +63,7 @@ public class CommentsFragment extends Fragment {
     }
 
     private void setUpActionBar() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.reviews_title);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.reviews_title);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setHasOptionsMenu(true);

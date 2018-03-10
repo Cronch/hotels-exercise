@@ -17,6 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
+            style="@style/HotelTitle"
             android:gravity="center" />
 
         <ImageView
@@ -36,6 +37,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/image"
             android:isIndicator="true"
+            android:padding="5dp"
             android:layout_margin="10dp"
             android:numStars="5" />
 
@@ -49,8 +51,8 @@
             android:layout_alignTop="@+id/ratingBar"
             android:layout_alignBottom="@+id/ratingBar"
             android:layout_margin="10dp"
-            android:textColor="@android:color/holo_blue_dark"
             android:visibility="gone"
+            style="@style/ButtonLink"
             android:text="@string/view_comments" />
 
         <TextView
@@ -60,6 +62,7 @@
             android:layout_below="@id/ratingBar"
             android:layout_margin="10dp"
             android:gravity="center"
+            style="@style/DetailsLabel"
             android:text="@string/description" />
 
         <TextView
@@ -76,6 +79,7 @@
             android:layout_below="@id/description"
             android:layout_margin="10dp"
             android:gravity="center"
+            style="@style/DetailsLabel"
             android:text="@string/amenities" />
 
         <android.support.v7.widget.RecyclerView
