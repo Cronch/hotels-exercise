@@ -4,4 +4,6 @@
     <string name="title_home">Home</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_web">Web</string>
+
+    <string name="retry">Retry</string>
 </resources>

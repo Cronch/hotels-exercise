@@ -1,15 +1,14 @@
 package example.com.hotels.ui.web;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.ValueCallback;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -17,7 +16,6 @@ import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.com.hotels.R;
-import example.com.hotels.ui.list.ListFragment;
 
 public class WebActivity extends AppCompatActivity {
 
@@ -47,13 +45,24 @@ public class WebActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                Snackbar.make(view, "Connection error. Try again later", Snackbar.LENGTH_LONG)
+                        .setAction(R.string.retry, (View v) -> loadUrl())
+                        .show();
+            }
         });
+        loadUrl();
+    }
+
+    private void loadUrl() {
         webView.loadUrl("https://www.despegar.com.ar/");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
         }
