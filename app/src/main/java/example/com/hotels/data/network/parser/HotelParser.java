@@ -35,6 +35,7 @@ public class HotelParser extends BaseParser<Hotel> {
     }
 
     private class Comment {
+        private String title;
         private String good;
         private String bad;
     }
@@ -89,6 +90,7 @@ public class HotelParser extends BaseParser<Hotel> {
     private example.com.hotels.data.model.Review buildReview(Review review) {
         return example.com.hotels.data.model.Review.builder()
                 .user(buildUser(review.user))
+                .title(review.comments != null && review.comments.title != null ? review.comments.title : null)
                 .goodComments(review.comments != null ? review.comments.good : null)
                 .badComments(review.comments != null ? review.comments.bad : null)
                 .build();
