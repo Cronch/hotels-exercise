@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRatingBar;
@@ -151,9 +153,17 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(image);
+        image.setOnClickListener((View v) -> zoomImage(hotel));
 
         List<Amenity> amenities = hotel.getAmenities();
         amenitiesAdapter.setData(amenities);
+    }
+
+    private void zoomImage(Hotel hotel) {
+        final String TAG = "imageDialog";
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        DialogFragment newFragment = ImageDialogFragment.newInstance(hotel);
+        newFragment.show(ft, TAG);
     }
 
 }
