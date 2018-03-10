@@ -81,6 +81,7 @@ public class ListFragment extends Fragment implements ListContract.View {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("");
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
+        setHasOptionsMenu(false);
     }
 
     private void setUpHotelList() {
