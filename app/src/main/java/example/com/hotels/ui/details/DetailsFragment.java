@@ -95,11 +95,16 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         setUpActionBar();
-        Long id = getArguments().getLong(ID_ARG);
         setUpAmenityList();
-        presenter.getHotelDetails(id);
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Long id = getArguments().getLong(ID_ARG);
+        presenter.getHotelDetails(id);
     }
 
     private void setUpActionBar() {

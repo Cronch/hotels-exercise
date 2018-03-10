@@ -69,9 +69,14 @@ public class ListFragment extends Fragment implements ListContract.View {
         unbinder = ButterKnife.bind(this, rootView);
         setUpActionBar();
         setUpHotelList();
-        presenter.getHotels();
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.getHotels();
     }
 
     private void setUpActionBar() {
