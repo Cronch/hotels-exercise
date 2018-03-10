@@ -28,6 +28,7 @@ import example.com.hotels.data.HotelManager;
 import example.com.hotels.data.model.Hotel;
 import example.com.hotels.ui.details.DetailsFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -59,6 +60,7 @@ public class ListFragment extends Fragment implements ListContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new ListPresenter(this, dataManager, AndroidSchedulers.mainThread(), Schedulers.io());
+        presenter.onViewAttached();
     }
 
     @Override
@@ -111,6 +113,12 @@ public class ListFragment extends Fragment implements ListContract.View {
         Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
                 .show();
         Log.e(LOG_TAG, "Hotels error", throwable);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.onViewDetached();
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.util.Log;
 import example.com.hotels.data.HotelManager;
 import example.com.hotels.data.network.parser.HotelParser;
 import io.reactivex.Scheduler;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class ListPresenter implements ListContract.Presenter {
 
@@ -14,6 +15,7 @@ public class ListPresenter implements ListContract.Presenter {
     private HotelManager dataManager;
     private Scheduler processScheduler;
     private Scheduler androidScheduler;
+    private CompositeDisposable compositeDisposable;
 
     ListPresenter(ListContract.View view, HotelManager dataManager, Scheduler androidScheduler, Scheduler processScheduler) {
         this.androidScheduler = androidScheduler;
@@ -23,9 +25,22 @@ public class ListPresenter implements ListContract.Presenter {
     }
 
     @Override
+    public void onViewAttached() {
+        compositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    public void onViewDetached() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
+    }
+
+    @Override
     public void getHotels() {
         Log.d(LOG_TAG, "Getting hotels");
         dataManager.getHotels()
+                .doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(processScheduler)
                 .observeOn(androidScheduler)
                 .subscribe(this::onSuccess, view::onError);

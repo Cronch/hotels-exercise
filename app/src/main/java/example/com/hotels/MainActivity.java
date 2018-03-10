@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -43,11 +44,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showListFragment() {
+        cleanFragmentBackStack();
         ListFragment listFragment = new ListFragment();
         final String tag = "list";
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainContainer, listFragment, tag)
                 .commit();
+    }
+
+    private void cleanFragmentBackStack() {
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void showFavorites() {

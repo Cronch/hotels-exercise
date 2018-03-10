@@ -3,6 +3,7 @@ package example.com.hotels.ui.list;
 import java.util.List;
 
 import example.com.hotels.data.model.Hotel;
+import io.reactivex.disposables.CompositeDisposable;
 
 public interface ListContract {
 
@@ -13,6 +14,10 @@ public interface ListContract {
     }
 
     interface Presenter {
+        void onViewAttached();
+
+        void onViewDetached();
+
         void getHotels();
     }
 
