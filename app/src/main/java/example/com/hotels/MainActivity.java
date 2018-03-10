@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 Log.d(LOG_TAG, "Home navigation pressed");
-                showListFragment();
+                showListScreen();
                 return true;
             /*case R.id.navigation_favorites:
-                showFavorites();
+                showFavoritesScreen();
                 return true;*/
             case R.id.navigation_web:
                 Log.d(LOG_TAG, "Web navigation pressed");
-                showWeb();
+                showWebScreen();
                 return false;
         }
         return false;
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(navigationListener);
 
         if (savedInstanceState == null) {
-            showListFragment();
+            showListScreen();
         }
     }
 
-    private void showListFragment() {
+    private void showListScreen() {
         cleanFragmentBackStack();
         ListFragment listFragment = new ListFragment();
         final String tag = "list";
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
-    private void showFavorites() {
+    private void showFavoritesScreen() {
         // TODO: Implement
     }
 
-    private void showWeb() {
+    private void showWebScreen() {
         startActivity(new Intent(this, WebActivity.class));
     }
 
