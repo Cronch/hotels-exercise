@@ -26,7 +26,6 @@ import example.com.hotels.data.model.Review;
 
 public class CommentsFragment extends Fragment {
 
-    private final static String LOG_TAG = "CommentsFragment";
     private final static String REVIEWS_ARG = "reviewsArg";
 
     private Unbinder unbinder;
