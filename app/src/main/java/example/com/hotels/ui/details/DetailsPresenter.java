@@ -3,9 +3,7 @@ package example.com.hotels.ui.details;
 import android.util.Log;
 
 import example.com.hotels.data.HotelManager;
-import example.com.hotels.data.model.Hotel;
 import example.com.hotels.data.network.parser.HotelParser;
-import example.com.hotels.ui.list.ListContract;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 
