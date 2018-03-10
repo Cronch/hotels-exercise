@@ -46,7 +46,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.name.setText(hotel.getName());
         GlideApp.with(holder.name.getContext())
                 .load(hotel.getMainPicture())
-                .placeholder(R.drawable.ic_notifications_black_24dp)
+                .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(holder.image);
     }

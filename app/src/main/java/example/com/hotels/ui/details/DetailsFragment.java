@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -60,6 +61,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     AppCompatRatingBar ratingBar;
     @BindView(R.id.amenities)
     RecyclerView amenities;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     public static DetailsFragment createInstance(Hotel hotel) {
         DetailsFragment detailsFragment = new DetailsFragment();
@@ -111,7 +114,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void setUpAmenityList() {
         amenitiesAdapter = new AmenitiesAdapter();
         amenities.setHasFixedSize(true);
@@ -130,12 +132,14 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void onError(Throwable throwable) {
         Log.e(LOG_TAG, "Error retrieving details", throwable);
+        progressBar.setVisibility(View.GONE);
         Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
                 .show();
     }
 
     @Override
     public void onSuccess(Hotel hotel) {
+        progressBar.setVisibility(View.GONE);
         Log.i(LOG_TAG, "Hotel details retrieved #" + hotel.getId());
 
         name.setText(hotel.getName());
@@ -144,7 +148,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
         GlideApp.with(getActivity())
                 .load(hotel.getMainPicture())
-                .placeholder(R.drawable.ic_notifications_black_24dp)
+                .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(image);
 
