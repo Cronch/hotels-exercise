@@ -29,7 +29,6 @@ import example.com.hotels.ui.details.DetailsFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-
 public class ListFragment extends Fragment implements ListContract.View {
 
     private Unbinder unbinder;
@@ -114,7 +113,8 @@ public class ListFragment extends Fragment implements ListContract.View {
     @Override
     public void onError(Throwable throwable) {
         progressBar.setVisibility(View.GONE);
-        Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
+        Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.retry, (View v) -> presenter.getHotels())
                 .show();
     }
 
