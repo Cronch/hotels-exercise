@@ -117,7 +117,6 @@ public class ListFragment extends Fragment implements ListContract.View {
         progressBar.setVisibility(View.GONE);
         Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
                 .show();
-        Log.e(LOG_TAG, "Hotels error", throwable);
     }
 
     @Override

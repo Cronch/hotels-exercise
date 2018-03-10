@@ -42,7 +42,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DetailsFragment extends Fragment implements DetailsContract.View {
 
-    private final static String LOG_TAG = "DetailsFragment";
     private final static String ID_ARG = "idArg";
 
     private Unbinder unbinder;
@@ -134,7 +133,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
     @Override
     public void onError(Throwable throwable) {
-        Log.e(LOG_TAG, "Error retrieving details", throwable);
         progressBar.setVisibility(View.GONE);
         Snackbar.make(container, "Connection error. Try again later", Snackbar.LENGTH_LONG)
                 .show();
@@ -143,7 +141,6 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
     @Override
     public void onSuccess(Hotel hotel) {
         progressBar.setVisibility(View.GONE);
-        Log.i(LOG_TAG, "Hotel details retrieved #" + hotel.getId());
 
         name.setText(hotel.getName());
         description.setText(hotel.getDescription());

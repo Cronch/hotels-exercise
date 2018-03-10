@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import example.com.hotels.ui.list.ListFragment;
@@ -14,15 +15,19 @@ import example.com.hotels.ui.web.WebActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = "MainActivity";
+
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = (@NonNull MenuItem item) -> {
         switch (item.getItemId()) {
             case R.id.navigation_home:
+                Log.d(LOG_TAG, "Home navigation pressed");
                 showListFragment();
                 return true;
             /*case R.id.navigation_favorites:
                 showFavorites();
                 return true;*/
             case R.id.navigation_web:
+                Log.d(LOG_TAG, "Web navigation pressed");
                 showWeb();
                 return false;
         }

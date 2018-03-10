@@ -43,12 +43,17 @@ public class ListPresenter implements ListContract.Presenter {
                 .doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(processScheduler)
                 .observeOn(androidScheduler)
-                .subscribe(this::onSuccess, view::onError);
+                .subscribe(this::onSuccess, this::onError);
     }
 
     private void onSuccess(HotelParser parser) {
         Log.d(LOG_TAG, "Hotels retrieved successfully");
         view.onSuccess(parser.getItemList());
+    }
+
+    private void onError(Throwable throwable) {
+        Log.e(LOG_TAG, "Hotels error", throwable);
+        view.onError(throwable);
     }
 
 }

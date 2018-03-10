@@ -3,6 +3,7 @@ package example.com.hotels.ui.details;
 import android.util.Log;
 
 import example.com.hotels.data.HotelManager;
+import example.com.hotels.data.model.Hotel;
 import example.com.hotels.data.network.parser.HotelParser;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,11 +37,6 @@ public class DetailsPresenter implements DetailsContract.Presenter {
         }
     }
 
-    private void onSuccess(HotelParser parser) {
-        Log.d(LOG_TAG, "Hotels retrieved successfully");
-        view.onSuccess(parser.getItem());
-    }
-
     @Override
     public void getHotelDetails(Long id) {
         Log.d(LOG_TAG, "Getting hotels");
@@ -48,7 +44,18 @@ public class DetailsPresenter implements DetailsContract.Presenter {
                 .doOnSubscribe(compositeDisposable::add)
                 .subscribeOn(processScheduler)
                 .observeOn(androidScheduler)
-                .subscribe(this::onSuccess, view::onError);
+                .subscribe(this::onSuccess, this::onError);
+    }
+
+    private void onSuccess(HotelParser parser) {
+        Hotel hotel = parser.getItem();
+        Log.d(LOG_TAG, "Hotel details success for #" + hotel.getId());
+        view.onSuccess(hotel);
+    }
+
+    private void onError(Throwable throwable) {
+        Log.e(LOG_TAG, "Error retrieving details", throwable);
+        view.onError(throwable);
     }
 
 }
