@@ -48,7 +48,7 @@ public class WebActivity extends AppCompatActivity {
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                Snackbar.make(view, "Connection error. Try again later", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Connection error. Try again later", Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.retry, (View v) -> loadUrl())
                         .show();
             }
