@@ -11,6 +11,8 @@ public interface ListContract {
         void onSuccess(List<Hotel> list);
 
         void onError(Throwable throwable);
+
+        void showHotelDetails(Hotel hotel);
     }
 
     interface Presenter {
@@ -19,6 +21,8 @@ public interface ListContract {
         void onViewDetached();
 
         void getHotels();
+
+        void onHotelClick(Hotel hotel);
     }
 
 }

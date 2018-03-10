@@ -3,6 +3,7 @@ package example.com.hotels.ui.list;
 import android.util.Log;
 
 import example.com.hotels.data.HotelManager;
+import example.com.hotels.data.model.Hotel;
 import example.com.hotels.data.network.parser.HotelParser;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -44,6 +45,11 @@ public class ListPresenter implements ListContract.Presenter {
                 .subscribeOn(processScheduler)
                 .observeOn(androidScheduler)
                 .subscribe(this::onSuccess, this::onError);
+    }
+
+    @Override
+    public void onHotelClick(Hotel hotel) {
+        view.showHotelDetails(hotel);
     }
 
     private void onSuccess(HotelParser parser) {

@@ -8,6 +8,10 @@ public interface DetailsContract {
         void onError(Throwable throwable);
 
         void onSuccess(Hotel hotel);
+
+        void showComments(Hotel hotel);
+
+        void zoomImage(Hotel hotel);
     }
 
     interface Presenter {
@@ -16,6 +20,10 @@ public interface DetailsContract {
         void onViewDetached();
 
         void getHotelDetails(Long hotelId);
+
+        void showComments(Hotel hotel);
+
+        void zoomImage(Hotel hotel);
     }
 
 }

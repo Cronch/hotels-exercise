@@ -47,6 +47,16 @@ public class DetailsPresenter implements DetailsContract.Presenter {
                 .subscribe(this::onSuccess, this::onError);
     }
 
+    @Override
+    public void showComments(Hotel hotel) {
+        view.showComments(hotel);
+    }
+
+    @Override
+    public void zoomImage(Hotel hotel) {
+        view.zoomImage(hotel);
+    }
+
     private void onSuccess(HotelParser parser) {
         Hotel hotel = parser.getItem();
         Log.d(LOG_TAG, "Hotel details success for #" + hotel.getId());

@@ -15,4 +15,10 @@ public class Log {
         System.out.println("ERROR: " + tag + ": " + msg);
         return 0;
     }
+
+    public static int e(String tag, String msg, Throwable throwable) {
+        System.out.println("ERROR: " + tag + ": " + msg + "/" + throwable.getMessage());
+        return 0;
+    }
+
 }

@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +27,10 @@ import example.com.hotels.data.HotelManager;
 import example.com.hotels.data.model.Hotel;
 import example.com.hotels.ui.details.DetailsFragment;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 
 public class ListFragment extends Fragment implements ListContract.View {
-
-    private final static String LOG_TAG = "ListFragment";
 
     private Unbinder unbinder;
     private ListContract.Presenter presenter;
@@ -93,14 +89,17 @@ public class ListFragment extends Fragment implements ListContract.View {
         list.setAdapter(listAdapter);
     }
 
-    private OnHotelClick onHotelClick = (Hotel hotel) -> {
+    private OnHotelClick onHotelClick = (Hotel hotel) -> presenter.onHotelClick(hotel);
+
+    @Override
+    public void showHotelDetails(Hotel hotel) {
         final String tag = "details";
         DetailsFragment details = DetailsFragment.createInstance(hotel);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mainContainer, details, tag)
                 .addToBackStack(tag)
                 .commit();
-    };
+    }
 
     interface OnHotelClick {
         void onClick(Hotel hotel);

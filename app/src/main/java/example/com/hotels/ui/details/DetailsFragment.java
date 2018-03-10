@@ -13,7 +13,6 @@ import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,7 +114,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().onBackPressed();
         }
@@ -148,7 +147,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
 
         if (!hotel.getReviews().isEmpty()) {
             viewComments.setVisibility(View.VISIBLE);
-            viewComments.setOnClickListener((View v) -> showComments(hotel));
+            viewComments.setOnClickListener((View v) -> presenter.showComments(hotel));
         }
 
         GlideApp.with(getActivity())
@@ -156,13 +155,14 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()
                 .into(image);
-        image.setOnClickListener((View v) -> zoomImage(hotel));
+        image.setOnClickListener((View v) -> presenter.zoomImage(hotel));
 
         List<Amenity> amenities = hotel.getAmenities();
         amenitiesAdapter.setData(amenities);
     }
 
-    private void showComments(Hotel hotel) {
+    @Override
+    public void showComments(Hotel hotel) {
         final String tag = "comments";
         CommentsFragment details = CommentsFragment.createInstance(hotel);
         getActivity().getSupportFragmentManager().beginTransaction()
@@ -171,7 +171,8 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
                 .commit();
     }
 
-    private void zoomImage(Hotel hotel) {
+    @Override
+    public void zoomImage(Hotel hotel) {
         final String TAG = "imageDialog";
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DialogFragment newFragment = ImageDialogFragment.newInstance(hotel);
