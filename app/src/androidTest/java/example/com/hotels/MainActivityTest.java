@@ -45,7 +45,7 @@ public class MainActivityTest {
     @Test
     public void testBasicNavigationAndData() {
         checkNavigationMenuVisible();
-
+        onView(withId(R.id.list)).check(matches(isDisplayed()));
         onView(withId(R.id.list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
         onView(withId(R.id.description)).check(matches(isDisplayed()));

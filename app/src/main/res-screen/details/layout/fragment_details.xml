@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white">
 
     <ImageView
@@ -12,7 +13,7 @@
         android:layout_marginBottom="30dp"
         android:visibility="gone"
         android:contentDescription="@string/accessibility_no_connection"
-        android:src="@drawable/ic_cloud_off"/>
+        app:srcCompat="@drawable/ic_cloud_off"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

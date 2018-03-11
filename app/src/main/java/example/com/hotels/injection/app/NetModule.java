@@ -1,7 +1,11 @@
 package example.com.hotels.injection.app;
 
+import android.support.test.espresso.IdlingRegistry;
+import android.support.test.espresso.IdlingResource;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.espresso.OkHttp3IdlingResource;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -10,6 +14,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import example.com.hotels.BuildConfig;
 import example.com.hotels.data.network.APIServices;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -41,12 +46,22 @@ public class NetModule {
     @Provides
     @Singleton
     static OkHttpClient provideOkHttpClient(HttpLoggingInterceptor loggingInterceptor) {
-        return new OkHttpClient.Builder()
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .build();
+
+        /*
+         * Necessary to make some async tests using Espresso
+         */
+        if (BuildConfig.DEBUG) {
+            IdlingResource resource = OkHttp3IdlingResource.create("OkHttp", okHttpClient);
+            IdlingRegistry.getInstance().register(resource);
+        }
+
+        return okHttpClient;
     }
 
     @Provides
