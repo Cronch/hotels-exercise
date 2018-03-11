@@ -48,6 +48,7 @@ public class ImageDialogFragment extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         unbinder = ButterKnife.bind(this, v);
 
+        // TODO: Abstract image library
         GlideApp.with(getActivity())
                 .load(url)
                 .placeholder(R.drawable.placeholder)

@@ -9,8 +9,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import example.com.hotels.MainActivity;
 import example.com.hotels.R;

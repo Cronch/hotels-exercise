@@ -10,14 +10,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import example.com.hotels.data.HotelManager;
 import example.com.hotels.data.model.Hotel;
 import example.com.hotels.data.network.parser.HotelParser;
-import example.com.hotels.ui.list.ListContract;
-import example.com.hotels.ui.list.ListPresenter;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.TestScheduler;
 

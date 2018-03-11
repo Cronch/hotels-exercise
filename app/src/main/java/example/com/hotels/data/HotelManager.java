@@ -4,7 +4,6 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import example.com.hotels.data.model.Hotel;
 import example.com.hotels.data.network.APIServices;
 import example.com.hotels.data.network.BaseDataManager;
 import example.com.hotels.data.network.parser.HotelParser;

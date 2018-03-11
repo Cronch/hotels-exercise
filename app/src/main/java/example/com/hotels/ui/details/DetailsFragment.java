@@ -157,6 +157,7 @@ public class DetailsFragment extends Fragment implements DetailsContract.View {
             viewComments.setOnClickListener((View v) -> presenter.showComments(hotel));
         }
 
+        // TODO: Abstract image library
         GlideApp.with(getActivity())
                 .load(hotel.getMainPicture())
                 .placeholder(R.drawable.placeholder)

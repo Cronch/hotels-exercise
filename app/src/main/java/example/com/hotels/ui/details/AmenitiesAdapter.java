@@ -2,7 +2,6 @@ package example.com.hotels.ui.details;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,6 @@ import java.util.List;
 
 import example.com.hotels.R;
 import example.com.hotels.data.model.Amenity;
-import example.com.hotels.data.model.Hotel;
-import example.com.hotels.injection.glide.GlideApp;
-import example.com.hotels.ui.list.ListFragment;
 
 public class AmenitiesAdapter extends RecyclerView.Adapter<AmenitiesAdapter.ViewHolder> {
 

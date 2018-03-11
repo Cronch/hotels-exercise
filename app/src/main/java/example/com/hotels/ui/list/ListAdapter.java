@@ -44,6 +44,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.container.setOnClickListener((View view) -> onHotelClick.onClick(hotel));
 
         holder.name.setText(hotel.getName());
+
+        // TODO: Abstract image library
         GlideApp.with(holder.name.getContext())
                 .load(hotel.getMainPicture())
                 .placeholder(R.drawable.placeholder)
