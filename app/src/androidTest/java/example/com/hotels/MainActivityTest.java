@@ -15,6 +15,8 @@ import example.com.hotels.utils.custom.RecyclerViewMatcher;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -43,14 +45,29 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testListBasicScrolls() {
+        checkNavigationMenuVisible();
+        onView(withId(R.id.list)).check(matches(isDisplayed()));
+        onView(withId(R.id.list)).perform(swipeUp());
+        onView(withId(R.id.list)).perform(swipeUp());
+        checkNavigationMenuVisible();
+        onView(withId(R.id.list)).perform(swipeDown());
+        onView(withId(R.id.list)).perform(swipeDown());
+    }
+
+    @Test
     public void testBasicNavigationAndData() {
         checkNavigationMenuVisible();
         onView(withId(R.id.list)).check(matches(isDisplayed()));
         onView(withId(R.id.list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
-        onView(withId(R.id.description)).check(matches(isDisplayed()));
         onView(withId(R.id.detailsContainer)).check(matches(hasDescendant(withId(R.id.name))));
         onView(withId(R.id.detailsContainer)).check(matches(hasDescendant(withId(R.id.image))));
+
+        detailsSwipeToBottom();
+        onView(withId(R.id.description)).check(matches(isDisplayed()));
+        onView(withId(R.id.amenitiesLabel)).check(matches(isDisplayed()));
+        detailsSwipeToTop();
 
         Espresso.pressBack();
         checkNavigationMenuVisible();
@@ -82,9 +99,14 @@ public class MainActivityTest {
 
     private void checkDetailsViews() {
         onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
-        onView(withId(R.id.description)).check(matches(isDisplayed()));
+        onView(withId(R.id.descriptionLabel)).check(matches(isDisplayed()));
         onView(withId(R.id.detailsContainer)).check(matches(hasDescendant(withId(R.id.name))));
         onView(withId(R.id.detailsContainer)).check(matches(hasDescendant(withId(R.id.image))));
+
+        detailsSwipeToBottom();
+        onView(withId(R.id.description)).check(matches(isDisplayed()));
+        onView(withId(R.id.amenitiesLabel)).check(matches(isDisplayed()));
+        detailsSwipeToTop();
     }
 
     private void checkNavigationMenuVisible() {
@@ -95,6 +117,20 @@ public class MainActivityTest {
 
     private static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
         return new RecyclerViewMatcher(recyclerViewId);
+    }
+
+    private void detailsSwipeToBottom() {
+        // We are assuming that based on the screen size on landscape we could need 3 swipes to get to the amenities
+        for (int swipeAmount = 0; swipeAmount < 4; swipeAmount++) {
+            onView(withId(R.id.scrollView)).perform(swipeUp());
+        }
+    }
+
+    private void detailsSwipeToTop() {
+        // We are assuming that based on the screen size on landscape we could need 3 swipes to get to the amenities
+        for (int swipeAmount = 0; swipeAmount < 4; swipeAmount++) {
+            onView(withId(R.id.scrollView)).perform(swipeDown());
+        }
     }
 
 }
